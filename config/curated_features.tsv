@@ -1,0 +1,23 @@
+feature_type	feature_id	label	group	notes
+gene	SMAD7	SMAD7	signaling	Key H3K27me3 anchor in the manuscript story
+gene	CDH1	CDH1	emt	EMT-like shift marker
+gene	CDH2	CDH2	emt	EMT-like shift marker
+gene	EZH2	EZH2	prc2	PRC2 splice anchor
+gene	EED	EED	prc2	PRC2 splice anchor
+gene	SOX9	SOX9	glial	ATAC/TF priming anchor
+gene	OLIG2	OLIG2	glial	ATAC/TF priming anchor
+gene	FRAT1	FRAT1	wnt	H3K27me3 promoter anchor from local data
+gene	CNTN4	CNTN4	neurodevelopment	ATAC promoter anchor from local data
+gene	FZD10	FZD10	wnt	ATAC promoter anchor from local data
+tf	KLF1	KLF1	stemness	Expected reduced accessibility in patient
+tf	KLF4	KLF4	stemness	Expected reduced accessibility in patient
+tf	KLF5	KLF5	stemness	Expected reduced accessibility in patient
+tf	KLF14	KLF14	stemness	Expected reduced accessibility in patient
+tf	POU3F4	POU3F4	stemness	Expected reduced accessibility in patient
+tf	Pou5f1::Sox2	Pou5f1::Sox2	stemness	Expected reduced accessibility in patient
+tf	SOX9	SOX9	glial	Expected increased accessibility in patient
+tf	OLIG2	OLIG2	glial	Expected increased accessibility in patient if present in TOBIAS results
+tf	TEAD1	TEAD1	glial	Expected increased accessibility in patient
+tf	TEAD2	TEAD2	glial	Expected increased accessibility in patient
+tf	TEAD3	TEAD3	glial	Expected increased accessibility in patient
+tf	TEAD4	TEAD4	glial	Expected increased accessibility in patient

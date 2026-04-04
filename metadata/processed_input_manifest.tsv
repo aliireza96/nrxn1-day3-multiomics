@@ -1,0 +1,24 @@
+comparison_id	source_type	source_path	description
+rna_main_all_controls	stringtie_counts_dir	data/processed_inputs/rna/stringtie_counts/	StringTie abundance directories for the main RNA comparison
+rna_supp_female_only	stringtie_counts_dir	data/processed_inputs/rna/stringtie_counts/	StringTie abundance directories for the sex-matched RNA comparison
+rna_density_controls	stringtie_counts_dir	data/processed_inputs/rna/stringtie_counts/	StringTie abundance directories for the RNA control-density analysis
+rna_density_patient	stringtie_counts_dir	data/processed_inputs/rna/stringtie_counts/	StringTie abundance directories for the RNA patient-density analysis
+splicing_main_rmats	jcec_tables	data/processed_inputs/splicing/	rMATS JCEC event tables and summary file for the manuscript splicing analysis
+atac_main_local_controls	diff_peaks	data/processed_inputs/atac/P_vs_ctrl_sig.txt	Main ATAC differential accessibility table
+atac_main_local_controls	annotations	data/processed_inputs/atac/P_vs_ctrl_sig_annot.txt	Main ATAC HOMER annotation table
+atac_main_local_controls	motif_results	data/processed_inputs/atac/bindetect_results.txt	Main TOBIAS/BINDetect results
+atac_supp_female_only	diff_peaks	data/processed_inputs/atac/P_vs_ctrl14_sig.txt	Sex-matched ATAC differential accessibility table
+atac_supp_female_only	annotations	data/processed_inputs/atac/anno_P_vs_ctrl14_sig_df.txt	Sex-matched ATAC annotation table
+atac_supp_female_only	promoter_annotations	data/processed_inputs/atac/anno_P_vs_ctrl14_sig_promoter_geneid.txt	Sex-matched ATAC promoter-annotation table
+atac_supp_female_only	motif_results	data/processed_inputs/atac/ctrl14_vs_allP_bindetect_results.csv	Sex-matched TOBIAS/BINDetect results
+chip_main_all_controls	diff_regions	data/processed_inputs/chip/H3k27me3_chip_sig_allsamples.txt	Main H3K27me3 differential-region table
+chip_main_all_controls	promoter_regions	data/processed_inputs/chip/H3k27me3_chip_sig_allsamples_promoter.txt	Main H3K27me3 promoter-region table
+chip_supp_female_only	diff_regions	data/processed_inputs/chip/H3k27me3_chip_sig_females.txt	Sex-matched H3K27me3 differential-region table
+chip_supp_female_only	promoter_regions	data/processed_inputs/chip/H3k27me3_chip_sig_females_promoter.txt	Sex-matched H3K27me3 promoter-region table
+integration_curated	display_order_table	data/processed_inputs/integration/updated_heatmap_curated_table.csv	Curated gene-order table for the Figure 5B integration heatmap
+integration_curated	category_table	data/processed_inputs/integration/triple_overlap_67_genes_categorized_with_visual_categories.csv	Annotated triple-overlap category table used for integration curation
+qpcr_validation	expression_table	data/processed_inputs/qpcr/all_genes_expression.txt	RT-qPCR relative-expression table for Supplementary Figure S3
+qpcr_validation	stats_table	data/processed_inputs/qpcr/qPCR_stats_summary.txt	RT-qPCR summary statistics for Supplementary Figure S3
+qc_supplement	metadata_table	data/processed_inputs/qc/Table_S1_metadata.csv	Sample metadata table used in Supplementary Figure S1
+qc_supplement	sequencing_qc	data/processed_inputs/qc/Table_S2_seq_qc.csv	Sequencing QC table used in Supplementary Figure S1
+qc_supplement	atac_qc	data/processed_inputs/qc/Table_S3_atac_qc.csv	ATAC QC summary table used in Supplementary Figure S1

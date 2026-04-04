@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the accompanying manuscript and repository record."
+title: "NRXN1 day-3 neural induction multi-omics manuscript code"
+type: software
+authors:
+  - family-names: "Ghahramani"
+    given-names: "Alireza"
+  - family-names: "Winn"
+    given-names: "Dania"
+  - family-names: "Shafiq"
+    given-names: "Sarfraz"
+  - family-names: "Jiang"
+    given-names: "Yan"
+  - family-names: "Eidhof"
+    given-names: "Ilse"
+  - family-names: "Falk"
+    given-names: "Anna"
+  - family-names: "Berube"
+    given-names: "Nathalie"
+repository-code: "https://github.com/<org-or-user>/nrxn1-day3-multiomics"
+license: "NOASSERTION"

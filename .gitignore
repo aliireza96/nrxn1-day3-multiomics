@@ -1,0 +1,32 @@
+# Runtime outputs
+outputs/*
+!outputs/.gitkeep
+
+# Processed assay inputs are documented here but distributed separately
+data/processed_inputs/*
+!data/processed_inputs/README.md
+!data/processed_inputs/*/
+data/processed_inputs/*/*
+!data/processed_inputs/**/.gitkeep
+!data/processed_inputs/**/README.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# R / editor state
+.Rproj.user/
+.Rhistory
+.DS_Store
+
+# Local environments
+.venv/
+.venv-figure-assembly/
+
+# Manuscript and review artifacts
+Manuscript_Drafts/
+old_result_drafts/
+PPTs/
+ScienceDirect_files/
+epigenetics_conference_2023/

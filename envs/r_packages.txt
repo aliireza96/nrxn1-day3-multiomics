@@ -1,0 +1,17 @@
+tximport
+DESeq2
+IHW
+aggregation
+ggplot2
+ggrepel
+dplyr
+tidyr
+readxl
+writexl
+data.table
+jsonlite
+SummarizedExperiment
+clusterProfiler
+org.Hs.eg.db
+topGO
+GO.db

@@ -1,0 +1,29 @@
+sample_id	modality	assay	line_id	line_type	clone_id	sex	density	genotype_group	include_manuscript	include_primary	include_supplement	input_counts_path	peak_path	notes
+ctrl10high	RNA_seq	RNA	ctrl10	control	ctrl10	male	high	control	TRUE	TRUE	FALSE	data/processed_inputs/rna/stringtie_counts/ctrl10high/t_data.ctab		Control RNA-seq sample used in the pooled main comparison
+ctrl10low	RNA_seq	RNA	ctrl10	control	ctrl10	male	low	control	TRUE	TRUE	FALSE	data/processed_inputs/rna/stringtie_counts/ctrl10low/t_data.ctab		Control RNA-seq sample used in the pooled main comparison
+ctrl14high	RNA_seq	RNA	ctrl14	control	ctrl14	female	high	control	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/ctrl14high/t_data.ctab		Sex-matched control RNA-seq sample
+ctrl14low	RNA_seq	RNA	ctrl14	control	ctrl14	female	low	control	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/ctrl14low/t_data.ctab		Sex-matched control RNA-seq sample
+ctrl7high	RNA_seq	RNA	ctrl7	control	ctrl7	male	high	control	TRUE	TRUE	FALSE	data/processed_inputs/rna/stringtie_counts/ctrl7high/t_data.ctab		Control RNA-seq sample used in the pooled main comparison
+ctrl7low	RNA_seq	RNA	ctrl7	control	ctrl7	male	low	control	TRUE	TRUE	FALSE	data/processed_inputs/rna/stringtie_counts/ctrl7low/t_data.ctab		Control RNA-seq sample used in the pooled main comparison
+NRX1Ihigh	RNA_seq	RNA	patient	patient	PI	female	high	patient	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/NRX1Ihigh/t_data.ctab		Patient clone PI RNA-seq sample
+NRX1Ilow	RNA_seq	RNA	patient	patient	PI	female	low	patient	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/NRX1Ilow/t_data.ctab		Patient clone PI RNA-seq sample
+NRX1IIhigh	RNA_seq	RNA	patient	patient	PII	female	high	patient	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/NRX1IIhigh/t_data.ctab		Patient clone PII RNA-seq sample
+NRX1IIlow	RNA_seq	RNA	patient	patient	PII	female	low	patient	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/NRX1IIlow/t_data.ctab		Patient clone PII RNA-seq sample
+NRX1IIIhigh	RNA_seq	RNA	patient	patient	PIII	female	high	patient	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/NRX1IIIhigh/t_data.ctab		Patient clone PIII RNA-seq sample
+NRX1IIIlow	RNA_seq	RNA	patient	patient	PIII	female	low	patient	TRUE	TRUE	TRUE	data/processed_inputs/rna/stringtie_counts/NRX1IIIlow/t_data.ctab		Patient clone PIII RNA-seq sample
+ctrl10high	ATAC_seq	ATAC	ctrl10	control	ctrl10	male	high	control	TRUE	TRUE	FALSE		data/processed_inputs/atac/macs2_peaks/ATACC10high_peaks.narrowPeak	Local ATAC control available for the pooled comparison
+ctrl10low	ATAC_seq	ATAC	ctrl10	control	ctrl10	male	low	control	TRUE	TRUE	FALSE		data/processed_inputs/atac/macs2_peaks/ATACC10low_peaks.narrowPeak	Local ATAC control available for the pooled comparison
+ctrl14high	ATAC_seq	ATAC	ctrl14	control	ctrl14	female	high	control	TRUE	TRUE	TRUE		data/processed_inputs/atac/macs2_peaks/ATACC14high_peaks.narrowPeak	Sex-matched ATAC control
+ctrl14low	ATAC_seq	ATAC	ctrl14	control	ctrl14	female	low	control	TRUE	TRUE	TRUE		data/processed_inputs/atac/macs2_peaks/ATACC14low_peaks.narrowPeak	Sex-matched ATAC control
+PIhigh	ATAC_seq	ATAC	patient	patient	PI	female	high	patient	TRUE	TRUE	TRUE		data/processed_inputs/atac/macs2_peaks/ATACPIhigh_peaks.narrowPeak	Patient ATAC clone PI
+PIlow	ATAC_seq	ATAC	patient	patient	PI	female	low	patient	TRUE	TRUE	TRUE		data/processed_inputs/atac/macs2_peaks/ATACPIlow_peaks.narrowPeak	Patient ATAC clone PI
+PIIhigh	ATAC_seq	ATAC	patient	patient	PII	female	high	patient	TRUE	TRUE	TRUE		data/processed_inputs/atac/macs2_peaks/ATACPIIhigh_peaks.narrowPeak	Patient ATAC clone PII
+PIIlow	ATAC_seq	ATAC	patient	patient	PII	female	low	patient	TRUE	TRUE	TRUE		data/processed_inputs/atac/macs2_peaks/ATACPIIlow_peaks.narrowPeak	Patient ATAC clone PII
+C10HK27ME	ChIP_seq	H3K27me3	ctrl10	control	ctrl10	male	high	control	TRUE	TRUE	FALSE		data/processed_inputs/chip/macs2_peaks/ME/C10HK27ME_peaks.broadPeak	H3K27me3 control sample from ctrl10, high-density culture
+C10LK27ME	ChIP_seq	H3K27me3	ctrl10	control	ctrl10	male	low	control	TRUE	TRUE	FALSE		data/processed_inputs/chip/macs2_peaks/ME/C10LK27ME_peaks.broadPeak	H3K27me3 control sample from ctrl10, low-density culture
+C14HK27ME3	ChIP_seq	H3K27me3	ctrl14	control	ctrl14	female	high	control	TRUE	TRUE	TRUE		data/processed_inputs/chip/macs2_peaks/ME/C14HK27ME3_peaks.broadPeak	H3K27me3 control sample from ctrl14, high-density culture
+C14LK27ME	ChIP_seq	H3K27me3	ctrl14	control	ctrl14	female	low	control	TRUE	TRUE	TRUE		data/processed_inputs/chip/macs2_peaks/ME/C14LK27ME_peaks.broadPeak	H3K27me3 control sample from ctrl14, low-density culture
+NRX1HK27ME3	ChIP_seq	H3K27me3	patient	patient	PI	female	high	patient	TRUE	TRUE	TRUE		data/processed_inputs/chip/macs2_peaks/ME/NRX1HK27ME3_peaks.broadPeak	Patient H3K27me3 sample, clone PI, high-density culture
+NRX1LK27ME3	ChIP_seq	H3K27me3	patient	patient	PI	female	low	patient	TRUE	TRUE	TRUE		data/processed_inputs/chip/macs2_peaks/ME/NRX1LK27ME3_peaks.broadPeak	Patient H3K27me3 sample, clone PI, low-density culture
+NRXHK27ME3	ChIP_seq	H3K27me3	patient	patient	PII	female	high	patient	TRUE	TRUE	TRUE		data/processed_inputs/chip/macs2_peaks/ME/NRXHK27ME3_peaks.broadPeak	Patient H3K27me3 sample, clone PII, high-density culture
+NRXLK27ME3	ChIP_seq	H3K27me3	patient	patient	PII	female	low	patient	TRUE	TRUE	TRUE		data/processed_inputs/chip/macs2_peaks/ME/NRXLK27ME3_peaks.broadPeak	Patient H3K27me3 sample, clone PII, low-density culture
