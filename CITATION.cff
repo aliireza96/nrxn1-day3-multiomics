@@ -18,4 +18,6 @@ authors:
   - family-names: "Berube"
     given-names: "Nathalie"
 repository-code: "https://github.com/aliireza96/nrxn1-day3-multiomics"
-license: "NOASSERTION"
+license: "MIT"
+version: "1.0.0"
+date-released: "2026-07-06"

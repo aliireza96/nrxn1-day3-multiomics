@@ -11,6 +11,7 @@ Output:
   outputs/figures/main/Figure_3C_chip_go.pdf
   outputs/figures/main/Figure_3C_chip_go.png
 
+
 Design notes:
   - Top 12 terms by p.adjust from clusterProfiler output
   - Two thematic groups: Synaptic/neuronal (orange) and Mesenchymal/neural crest (green)
@@ -41,22 +42,46 @@ OUT_PNG  = os.path.join(FIG_MAIN,   "Figure_3C_chip_go.png")
 # ── Thematic palette ───────────────────────────────────────────────────────────
 # Both colors match the thematic palette used in Figure 2B
 PALETTE = {
-    "Synaptic / neuronal":        "#D55E00",
-    "Mesenchymal / neural crest": "#009E73",
+    "Synaptic / neuronal":            "#D55E00",
+    "Neural crest / developmental":   "#009E73",
 }
 
 # ── Group assignment ───────────────────────────────────────────────────────────
 # Terms are assigned to thematic groups based on biological content.
 # Terms not listed here are classified as "Synaptic / neuronal" by default
-# (the majority of top terms reflect synaptic/neuronal biology).
-MESENCHYMAL_TERMS = {
-    "neural crest cell migration",
-    "mesenchymal cell differentiation",
-    "mesenchymal cell migration",
-    "stem cell differentiation",
+# (the majority of terms reflect synaptic/neuronal biology).
+# NOTE: this panel avoids the label "mesenchymal": the developmental terms here
+# are driven by neural-crest / early-lineage genes (SOX10, RET, semaphorins,
+# FGF19, LEF1) that GO also tags as "mesenchyme" because the neural crest is an
+# embryonic source of ectomesenchyme. The up-regulated mesenchymal EMT effectors
+# (TWIST2, SNAI2, CDH2) are a distinct, oppositely-directed program shown in
+# Figure 3D, so "mesenchymal" is reserved for that panel to avoid confusion.
+DEVELOPMENTAL_TERMS = {
     "neural crest cell development",
-    "epithelial to mesenchymal transition",
+    "neural crest cell differentiation",
+    "neural crest cell migration",
+    "stem cell differentiation",
+    "stem cell development",
+    "mesenchymal cell differentiation",
+    "mesenchyme development",
+    "fibroblast growth factor receptor signaling pathway",
+    "extracellular matrix organization",
+    "extracellular structure organization",
 }
+
+# Relabel a redundant representative to the most biologically accurate term
+# among the terms that collapse into it (its genes are canonical neural crest).
+RELABEL = {
+    "mesenchymal cell differentiation": "neural crest cell development",
+    "mesenchyme development":           "neural crest cell development",
+}
+
+# Gene-overlap (Jaccard) threshold for collapsing semantically redundant GO
+# terms driven by overlapping gene sets (REVIGO / clusterProfiler::simplify
+# style). Terms sharing >= this fraction of genes with an already-kept, more
+# significant term are treated as redundant and dropped.
+JACCARD_CUTOFF = 0.5
+PADJ_CUTOFF    = 0.05
 
 # ── Constants ──────────────────────────────────────────────────────────────────
 TOP_N      = 12
@@ -84,31 +109,55 @@ def representative_counts(counts):
     return deduped
 
 
+def _jaccard(a, b):
+    a, b = set(a), set(b)
+    union = a | b
+    return len(a & b) / len(union) if union else 0.0
+
+
 def read_chip_go_tsv(path, top_n=12):
-    """Read clusterProfiler GO table, return top_n rows sorted by p.adjust."""
+    """Read clusterProfiler GO table and return a non-redundant set of terms.
+
+    Steps: (1) keep terms with p.adjust < PADJ_CUTOFF; (2) sort by significance;
+    (3) greedily drop any term whose driver-gene set overlaps an already-kept,
+    more significant term by >= JACCARD_CUTOFF (semantic redundancy reduction);
+    (4) relabel collapsed representatives to their most accurate term; (5) return
+    the top_n most significant survivors.
+    """
     rows = []
     with open(path, newline="") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
         for row in reader:
             try:
+                padj = float(row["p.adjust"])
+                if padj >= PADJ_CUTOFF:
+                    continue
                 rows.append({
-                    "term":    row["Description"],
-                    "padj":    float(row["p.adjust"]),
-                    "count":   int(row["Count"]),
-                    "score":   -math.log10(float(row["p.adjust"])),
+                    "term":  row["Description"],
+                    "padj":  padj,
+                    "count": int(row["Count"]),
+                    "score": -math.log10(padj),
+                    "genes": frozenset(str(row["geneID"]).split("/")),
                 })
             except (ValueError, KeyError):
                 continue
     rows.sort(key=lambda r: r["padj"])
-    return rows[:top_n]
+
+    kept = []
+    for r in rows:
+        if any(_jaccard(r["genes"], k["genes"]) >= JACCARD_CUTOFF for k in kept):
+            continue
+        r["term"] = RELABEL.get(r["term"].lower(), r["term"])
+        kept.append(r)
+    return kept[:top_n]
 
 
 def assign_group(term):
     """Assign thematic group based on term text."""
     term_lower = term.lower()
-    for mesench_term in MESENCHYMAL_TERMS:
-        if mesench_term in term_lower:
-            return "Mesenchymal / neural crest"
+    for dev_term in DEVELOPMENTAL_TERMS:
+        if dev_term in term_lower:
+            return "Neural crest / developmental"
     return "Synaptic / neuronal"
 
 
@@ -123,10 +172,10 @@ def main():
     # Mesenchymal at bottom (low y), Synaptic at top (high y) for visual grouping
     synaptic   = sorted([r for r in rows if r["group"] == "Synaptic / neuronal"],
                         key=lambda r: r["score"])
-    mesenchymal = sorted([r for r in rows if r["group"] == "Mesenchymal / neural crest"],
+    mesenchymal = sorted([r for r in rows if r["group"] == "Neural crest / developmental"],
                          key=lambda r: r["score"])
 
-    # Plot order: mesenchymal at bottom, separator, synaptic at top
+    # Plot order: developmental at bottom, separator, synaptic at top
     ordered = mesenchymal + synaptic
     n = len(ordered)
 
@@ -224,7 +273,11 @@ def main():
     plt.close(fig)
     print(f"Saved: {OUT_PDF}")
     print(f"Saved: {OUT_PNG}")
-    print("Regenerate the assembled figure bundle with scripts/figures/assemble_complete_figures.py if needed.")
+    print()
+    print("NOTE: Regenerate the assembled panel after this script:")
+    print("  cd manuscript_reanalysis/assembly_work")
+    print("  pdflatex -interaction=nonstopmode Figure_3C_assembly.tex")
+    print("  cp Figure_3C_assembly.pdf ../outputs/figures/main/Figure_3C_panel.pdf")
 
 
 if __name__ == "__main__":
