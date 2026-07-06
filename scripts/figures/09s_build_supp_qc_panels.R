@@ -41,14 +41,15 @@ locate_project_root <- function(start = getwd()) {
 ensure_dir <- function(path) dir.create(path, recursive = TRUE, showWarnings = FALSE)
 
 find_external_root <- function() {
-  candidates <- c(
-    "/Volumes/ADATA AG/NRXN1α_multi_omics",
-    "/Volumes/ADATA AG/NRXN1a_multi_omics",
-    "/Volumes/ADATA AG",
-    "/Volumes/ADATA_AG"
-  )
-  hit <- candidates[file.exists(candidates)]
-  if (length(hit)) normalizePath(hit[1], winslash = "/", mustWork = TRUE) else NA_character_
+  # Optional large ATAC inputs (fragment/TSS BAMs and the computeMatrix output)
+  # can live outside the repository. Set NRXN1_EXTERNAL_ROOT to that directory to
+  # enable the extended ATAC profile panels. When it is unset or missing, the
+  # workflow skips those optional panels.
+  root <- Sys.getenv("NRXN1_EXTERNAL_ROOT", unset = NA_character_)
+  if (is.na(root) || !nzchar(root) || !file.exists(root)) {
+    return(NA_character_)
+  }
+  normalizePath(root, winslash = "/", mustWork = TRUE)
 }
 
 theme_qc <- function(base_size = 10) {
