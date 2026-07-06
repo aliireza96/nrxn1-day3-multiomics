@@ -349,7 +349,7 @@ def build_workbook(spec: WorkbookSpec) -> None:
  xmlns:dcmitype="http://purl.org/dc/dcmitype/"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dc:title>{escape(spec.output_name.replace('.xlsx', ''))}</dc:title>
-  <dc:creator>Codex</dc:creator>
+  <dc:creator>Alireza Ghahramani</dc:creator>
 </cp:coreProperties>""",
         )
         zf.writestr(
@@ -357,7 +357,7 @@ def build_workbook(spec: WorkbookSpec) -> None:
             """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
  xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
-  <Application>Codex</Application>
+  <Application>build_supplementary_tables.py</Application>
 </Properties>""",
         )
         zf.writestr(
