@@ -61,14 +61,26 @@ collect_common_genes <- function(go_data, go_ids, query_genes) {
   )
 }
 
-run_topgo_bp <- function(gene_vec, label, node_size = 5) {
+run_topgo_bp <- function(gene_vec, label, node_size = 5, background_genes = NULL) {
   gene_vec <- sort(unique(gene_vec[!is.na(gene_vec) & nzchar(gene_vec)]))
   if (!length(gene_vec)) {
     stop("No genes available for topGO: ", label)
   }
 
-  background_map <- topGO::annFUN.org("BP", mapping = "org.Hs.eg.db", ID = "symbol")
-  background_genes <- sort(unique(unlist(background_map)))
+  # Background/universe. When an explicit set is supplied (e.g. the expressed-gene
+  # universe of an RNA-seq assay, defined as all genes tested by DESeq2 after
+  # independent filtering), it is used directly; otherwise the default is all
+  # symbol-mapped genes annotated to a GO BP term (genome-wide annotation set).
+  annotated_genes <- sort(unique(unlist(
+    topGO::annFUN.org("BP", mapping = "org.Hs.eg.db", ID = "symbol")
+  )))
+  if (is.null(background_genes)) {
+    background_genes <- annotated_genes
+  } else {
+    background_genes <- sort(unique(background_genes[!is.na(background_genes) & nzchar(background_genes)]))
+    # topGO can only score genes carrying a BP annotation; keep the query in-universe.
+    background_genes <- sort(unique(c(background_genes, gene_vec[gene_vec %in% annotated_genes])))
+  }
   gene_factor <- factor(ifelse(background_genes %in% gene_vec, 1L, 0L))
   names(gene_factor) <- background_genes
 
@@ -240,8 +252,31 @@ for (job in go_jobs) {
     next
   }
 
+  # For RNA-seq differential-expression jobs, restrict the GO universe to genes
+  # actually tested by DESeq2 (non-NA adjusted p-value) rather than the whole
+  # genome, giving an assay-appropriate expressed-gene background. Other job
+  # types keep the default genome-wide annotation background.
+  job_background <- NULL
+  if (identical(job$job_type, "rna_directional")) {
+    full_results_path <- sub("_sig_lfc\\.tsv$", ".tsv", job$input_path)
+    if (file.exists(full_results_path)) {
+      full_df <- read_tsv_base(full_results_path)
+      if (all(c("gene_name", "padj") %in% names(full_df))) {
+        expressed <- full_df$gene_name[!is.na(suppressWarnings(as.numeric(full_df$padj)))]
+        job_background <- sort(unique(expressed[!is.na(expressed) & nzchar(expressed)]))
+        message("  Using expressed-gene background (", length(job_background), " tested genes).")
+      } else {
+        warning("Full results lack gene_name/padj for ", job$comparison_id,
+                "; falling back to genome-wide background.")
+      }
+    } else {
+      warning("Full results not found for ", job$comparison_id,
+              " at ", full_results_path, "; falling back to genome-wide background.")
+    }
+  }
+
   message("Running topGO for ", job$comparison_id, " (", length(gene_vec), " genes).")
-  topgo_res <- run_topgo_bp(gene_vec, job$label, node_size = 5)
+  topgo_res <- run_topgo_bp(gene_vec, job$label, node_size = 5, background_genes = job_background)
   full_table <- topgo_res$table
   top40_table <- utils::head(full_table, 40)
 
