@@ -76,9 +76,3 @@ Each main analysis script documents:
 - which inputs it expects
 - which outputs it writes
 - which earlier workflow steps it depends on
-
-## Data and release notes
-
-- Raw sequencing data should be referenced through the manuscript data-availability statement or archive accession when public.
-- Final manuscript PDFs, supplementary figures, and supplementary tables are better distributed through GitHub Releases or a Zenodo archive than committed into the repo tree.
-- Figure-level provenance, including maintained assets and optional large external inputs, is documented in [`docs/figure_provenance.md`](docs/figure_provenance.md).
