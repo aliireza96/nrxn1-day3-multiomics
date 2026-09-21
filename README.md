@@ -4,22 +4,14 @@ This repository is the public code companion for the NRXN1alpha day-3 neural ind
 
 ## Repository scope
 
-This repo starts from `processed assay inputs`, not from raw FASTQ alignment pipelines and not from manuscript-only frozen figure tables. The goal is to show how the manuscript analyses and figures were generated while keeping the repository small enough to share and review.
+This repo starts from `processed assay inputs`, not from raw FASTQ alignment pipelines.
 
 Included here:
-- canonical assay-level rebuild scripts in [`scripts/analysis`](scripts/analysis)
+- Assay-level rebuild scripts in [`scripts/analysis`](scripts/analysis)
 - final figure and supplementary-table builders in [`scripts/figures`](scripts/figures)
 - metadata and manuscript-facing manifests in [`metadata`](metadata)
 - placeholder input directories plus modality-specific setup notes in [`data/processed_inputs`](data/processed_inputs)
 
-Not included here:
-- raw sequencing files
-- BAMs, BigWigs, or large peak/motif work directories
-- assay-level processed input files
-- manuscript draft `.docx` files and co-author packaging artifacts
-- generated outputs committed to Git
-
-Generated files should be written under [`outputs`](outputs) and shared as release assets rather than tracked in the repository history. Assay-level processed inputs should be distributed separately through a release archive, Zenodo record, institutional repository, or another linked location and unpacked into the documented paths before rerunning the workflow.
 
 ## Top-level layout
 
